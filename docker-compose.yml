@@ -1,0 +1,36 @@
+version: "3.7"
+
+networks:
+  cal-net:
+    name: cal-net
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+       - subnet: "192.165.0.0/24"
+  
+services:
+  client: # dev serve
+    build: ./client
+    networks:
+      cal-net:
+        ipv4_address: "192.165.0.3"
+    ports:
+      - "8080:8080"
+    
+  server:
+    build: ./server
+    networks:
+      cal-net:
+        ipv4_address: "192.165.0.4"
+    ports:
+      - "8000:6634"
+
+    external_links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    networks:
+      cal-net:
+        ipv4_address: "192.165.0.5"

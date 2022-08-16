@@ -1,0 +1,3 @@
+{
+    "ignore": ["node_modules/","coverage/",".nyc_output/","mochawesome-report/", "app/README.md"] 
+}
